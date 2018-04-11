@@ -1,8 +1,65 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
+  padding: 0 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  body > header {
+    padding: 0 150px 0 0;
+    overflow: hidden; }
+    body > header > nav {
+      height: 50px;
+      width: 100%;
+      float: left; }
+      body > header > nav > li {
+        list-style: none;
+        margin: 0 15px 0 0;
+        display: inline-block;
+        line-height: 50px; }
+      body > header > nav a {
+        font-size: 1.25em;
+        text-decoration: none;
+        padding: 2px;
+        border: 1px solid transparent;
+        border-radius: 2px;
+        color: #999; }
+        body > header > nav a:visited {
+          color: green; }
+        body > header > nav a:hover {
+          background-color: #f7f7f7; }
+    body > header > div.reg-log {
+      float: left;
+      width: 150px;
+      position: relative;
+      right: -150px;
+      margin-left: -150px;
+      height: 50px; }
+      body > header > div.reg-log a {
+        line-height: 50px;
+        font-size: 1.25em;
+        text-decoration: none;
+        padding: 2px;
+        border: 1px solid transparent;
+        border-radius: 2px;
+        color: #999; }
+        body > header > div.reg-log a:nth-child(2) {
+          background-color: green;
+          color: #fff; }
+        body > header > div.reg-log a:nth-child(1):hover {
+          background-color: #f7f7f7; }
+  body > .container {
+    background-color: #eee;
+    padding: 0 150px 0 0;
+    overflow: hidden;
+    height: 800px; }
+    body > .container > .main {
+      float: left;
+      width: 100%; }
+    body > .container > .right {
+      float: left;
+      width: 150px;
+      position: relative;
+      right: -150px;
+      margin-left: -150px;
+      height: 100%;
+      background-color: #f7f7f7; }
+      body > .container > .right > div.reg-log {
+        position: relative;
+        top: -25px; }

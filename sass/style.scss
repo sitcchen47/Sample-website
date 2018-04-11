@@ -1,0 +1,96 @@
+$sidebarWidth: 150px;
+$headerHeight: 50px;
+$containerHeight: 800px;
+$bgColor: #eee;
+
+$liInterval: 15px;
+$aPadding: 2px;
+
+@mixin aCompo {
+    font-size: 1.25em;
+    text-decoration: none;
+    padding: $aPadding;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    color: #999;
+}
+
+@mixin holySetting {
+    float:left;
+    width: $sidebarWidth;
+    position: relative;
+    right: -$sidebarWidth;
+    margin-left: -$sidebarWidth;
+}
+body {
+    padding: 0 $headerHeight;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    > header { 
+        padding: 0 $sidebarWidth 0 0;
+        overflow: hidden;
+        > nav {
+            height: $headerHeight;  
+            width: 100%;
+            float: left;  
+            > li {
+                list-style: none;
+                margin: 0 $liInterval 0 0;
+                display: inline-block;
+                line-height: $headerHeight;
+            }
+
+            a {
+                @include aCompo();
+                &:visited {
+                    color: green;
+                }
+                &:hover {
+                    background-color: mix(#ddd, #fff, 25%);
+                }
+            }
+        }
+        > div.reg-log {
+            @include holySetting();
+
+            height: $headerHeight;
+                
+            a {
+                line-height: $headerHeight;
+                @include aCompo();
+               
+                &:nth-child(2) {
+                    background-color: green;
+                    color: #fff;
+                }
+                &:nth-child(1):hover {
+                    background-color: mix(#ddd, #fff, 25%);
+                }
+            }
+        }
+    }
+
+    > .container {
+        background-color: $bgColor;
+        padding: 0 $sidebarWidth 0 0;
+        overflow: hidden;
+        height: $containerHeight;
+        
+        > .main {
+            float: left;
+            width: 100%;
+        }
+    
+        > .right {
+            @include holySetting();
+
+            height: 100%;
+            background-color: mix($bgColor, #fff);
+
+            > div.reg-log {
+                position: relative;
+                top: - $headerHeight / 2;
+            }
+        }
+    }
+}
+  

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "build": "node-sass sass -o public/stylesheets",
     "start": "node ./bin/www"
   },
   "dependencies": {
@@ -17,5 +18,8 @@
     "mongoose": "^5.0.14",
     "morgan": "~1.9.0",
     "png-word": "0.0.7"
+  },
+  "devDependencies": {
+    "node-sass": "^4.8.3"
   }
 }

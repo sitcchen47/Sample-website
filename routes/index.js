@@ -10,7 +10,7 @@ var pw = new PW(PW.GRAY);
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.locals.user = req.session.user;
-
+  // 主页默认为产品页
   res.render('index', { title: 'Express'});
 });
 
@@ -32,6 +32,16 @@ router.get('/logout', (req, res) => {
 router.post('/reg', async (req, res) => {
   const { username, password, confirm, confirmPic } = req.body;
   // validation must be passed and then continue to the next step
+  let curUser = await DataModel.User.find({name: username});
+  if (username === "管理员" || curUser[0]) {
+    req.session.error = {
+      message: "用户名已存在",
+      position: "username"
+    };
+    res.redirect("back");
+    return;
+  }
+ 
   if (password === confirm && req.session.confirmPic.toLowerCase() === confirmPic.toLowerCase()) {
     // 把该User写入数据库中
     let salt = await bcrypt.genSalt(5);
@@ -80,8 +90,8 @@ router.post("/login", async (req, res) => {
   let curUser;
   // admin account information
   let admin = {
-    name: admincchen47,
-    password: sitCC940630
+    name: 'admincchen47',
+    password: 'sitCC940630'
   };
 
   try {
@@ -120,7 +130,7 @@ router.post("/login", async (req, res) => {
     }
   } else if (loginname === admin.name && password === admin.password){
     res.locals.user = req.session.user = "管理员";
-    res.render('admin');
+    res.render('/manage');
     // 管理员权限
   } else {
     req.session.error = {

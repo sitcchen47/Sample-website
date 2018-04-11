@@ -19,7 +19,8 @@ const User = mongoose.model("User", {
         require: true
     },
     editTime: Date, 
-    articles: [String] // Article _id
+    articles: [String], // Article _id
+    reviews: [String] // review_id
 });
 
 const Article = mongoose.model("Article", {
