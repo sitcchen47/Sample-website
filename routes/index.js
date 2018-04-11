@@ -78,6 +78,12 @@ router.post("/login", async (req, res) => {
   const { loginname, password, confirmPic } = req.body;
   // validation must be passed and then continue to the next step
   let curUser;
+  // admin account information
+  let admin = {
+    name: admincchen47,
+    password: sitCC940630
+  };
+
   try {
     curUser = await DataModel.User.find({name: loginname}); // that will be an array
   } catch(e) {
@@ -112,13 +118,16 @@ router.post("/login", async (req, res) => {
       }
       res.redirect("back");
     }
+  } else if (loginname === admin.name && password === admin.password){
+    res.locals.user = req.session.user = "管理员";
+    res.render('admin');
+    // 管理员权限
   } else {
     req.session.error = {
       message: "用户名不存在",
       position: "loginname"
     }
     res.redirect("back");
-    return;
   }
 });
 
