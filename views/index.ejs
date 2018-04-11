@@ -7,5 +7,14 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <div class="reg-log">
+      <% if (user) { %>
+        <div><%= user %>已登录</div>
+        <a href="/logout">退出登录</a>  
+      <% } else { %>
+        <button><a href="/reg">注册</a></button>
+        <button><a href="/login">登录</a></button>
+      <% } %>
+    </div>
   </body>
 </html>

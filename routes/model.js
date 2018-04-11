@@ -7,8 +7,12 @@ const User = mongoose.model("User", {
         type: String,
         require: true,
         match: [/^([a-zA-Z]|[u4e00-u9fa5]|_)([a-zA-Z0-9]|[u4e00-u9fa5]|_)*$/, "包含中文，英文，数字，下划线，不能输入括号，不能以数字开头"],
-        minlength: [4, "用户名长度不少于4个字符"],
+        minlength: [3, "用户名长度不少于3个字符"],
         maxlength: [10, "用户名长度不大于10个字符"]
+    },
+    hashedPassword: {
+        type: String,
+        require: true
     },
     createTime: {
         type: Date,

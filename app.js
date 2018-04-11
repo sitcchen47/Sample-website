@@ -4,11 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require("express-session");
+var MongoStore = require("connect-mongo")(session);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+app.use(session({
+  store: new MongoStore({ url: 'mongodb://localhost/test-app' }),
+  secret: "jfowif",
+  cookie:{ maxAge: 1000 * 60 * 5} // 有效时长为两分钟
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
