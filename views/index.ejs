@@ -1,39 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <!-- <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p> -->
-    <header>
-      <nav>
-        <li><a href="/" data-visited="true">主页</a></li>
-        <li><a href="/products">产品</a></li>
-        <li><a href="/articles">文章</a></li>
-        <li><a href="/reviews">留言板</a></li>
-        <% if (user && user === "管理员") { %>
-          <li><a href="/manage">产品管理</a></li>  
-        <% } %>
-      </nav>
-      <div class="reg-log">
-        <% if (user) { %>
-            <div><%= user %>已登录
-              <a href="/logout">退出</a>
-            </div>  
-        <% } else { %>
-          <a href="/login">登录</a>
-          <a href="/reg">注册</a>
-        <% } %>
-      </div>
-    </header>
-    <div class="container">
-      <div class="main">
-        <div><a href="">最新发布</a></div>
-      </div>
-      <div class="right">
-        
-      </div>
-    </div> 
-</html>
+<%- include('header', {user: user}) %>
+
+<div><a href="">最新发布</a></div>
+
+<%- include('footer') %>
