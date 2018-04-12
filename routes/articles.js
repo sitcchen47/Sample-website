@@ -36,7 +36,7 @@ router.post('/post', async (req, res) => {
             await article.save();            
         } catch(e) {
             req.session.error = {
-                message: e.errors.name.message,
+                message: e.errors['title'].message,
                 position: 'title'
             };           
         }

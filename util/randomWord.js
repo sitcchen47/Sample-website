@@ -19,6 +19,7 @@ module.exports = {
         let dif = Date.now() - past; // millisecond
 
         let secondDif = parseInt(dif / 1000);
+        if (secondDif === 0) return '刚刚';
         if (secondDif >= 1 && secondDif < 60) {
             return `${secondDif}秒前`;
         }

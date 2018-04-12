@@ -21,7 +21,7 @@ router.get('/reg', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  let error = req.session.error.position === "alert" ? null : req.session.error ;
+  let error = req.session.error && req.session.error.position === "alert" ? null : req.session.error ;
   res.render('login', {error});
 });
 

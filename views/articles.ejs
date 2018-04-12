@@ -3,9 +3,9 @@
         <div class="main">
             <% for(let i = 0; i < articles.length; i++) { %>
                 <div class="article">
-                    <a href="#"><%= articles[i].liked %></a>
                     <p> <a href="/articles/id/<%= articles[i]._id %>"><%= articles[i].title %></a> <br>
                         <span><%= articles[i].author %><span> | <span>发布于</span> <span><%= Messages[i]%></span>
+                        <!-- <a href="#"><%= articles[i].liked %></a> -->
                         <hr>
                     </p>
                 </div>

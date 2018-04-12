@@ -2,11 +2,11 @@
     <div class="container">
         <div class="main">
             <article>
-                <a href="#"><%= article.liked %></a>
-                <h2><a href="/articles/id/<%= article._id %>"><%= article.title %></a> | <span><%= article.author %></span></h2>
                 <p>
+                    <h2><a href="/articles/id/<%= article._id %>"><%= article.title %></a> | <span><%= article.author %></span></h2>
                     <%= article.body %>
-                </p>    
+                    <!-- <a href="#"><%= article.liked %></a> -->
+                </p>                    
             </article>                
         </div>
         <div class="right"></div>

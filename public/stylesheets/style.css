@@ -58,6 +58,22 @@ body {
           display: block; }
       body > .container > .main > .article {
         margin: 30px; }
+        body > .container > .main > .article a {
+          text-decoration: none;
+          font-size: 1.2em;
+          color: #000; }
+          body > .container > .main > .article a:hover {
+            color: #999;
+            text-decoration: underline; }
+      body > .container > .main > article {
+        margin: 30px; }
+        body > .container > .main > article a {
+          text-decoration: none;
+          font-size: 1.2em;
+          color: #000; }
+          body > .container > .main > article a:hover {
+            color: #999;
+            text-decoration: underline; }
     body > .container > .right {
       float: left;
       width: 150px;

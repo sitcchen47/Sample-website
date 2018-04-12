@@ -5,6 +5,7 @@ $bgColor: #eee;
 
 $liInterval: 15px;
 $aPadding: 2px;
+$articleMargin: 30px;
 
 @mixin aCompo {
     font-size: 1.25em;
@@ -21,6 +22,19 @@ $aPadding: 2px;
     position: relative;
     right: -$sidebarWidth;
     margin-left: -$sidebarWidth;
+}
+
+@mixin articleLayout {
+    margin: $articleMargin;
+    a {
+        text-decoration: none;
+        font-size: 1.2em;
+        color: #000;
+        &:hover {
+            color: 	#999;
+            text-decoration: underline;
+        }
+    }
 }
 body {
     padding: 0 $headerHeight;
@@ -80,14 +94,18 @@ body {
             width: 100%;
 
             > .divForm {
-                margin: 30px;
+                margin: $articleMargin;
 
                 label, input, textarea {
                     display: block;
                 }
             }
             > .article {
-                margin: 30px;
+                @include articleLayout();
+            }
+
+            > article {
+                @include articleLayout();                
             }
         }
     
