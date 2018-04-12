@@ -10,6 +10,7 @@ var pw = new PW(PW.GRAY);
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.locals.user = req.session.user;
+  req.session.error = null;
   // 主页默认为产品页
   res.render('index', { title: 'Express'});
 });
@@ -20,7 +21,7 @@ router.get('/reg', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  let error = req.session.error;
+  let error = req.session.error.position === "alert" ? null : req.session.error ;
   res.render('login', {error});
 });
 

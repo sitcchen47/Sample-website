@@ -27,12 +27,17 @@ const Article = mongoose.model("Article", {
     title: {
         type: String,
         require: true,
-        minlength: 1
+        minlength: [5, "标题不能少于5个字"],
+        minlength: [20, "标题不能多于20个字"]
     },
     body: String,
+    liked: {
+        type: Number,
+        default: 0
+    },
     createTime: Date,
     editTime: Date,
-    author: String // User _id 
+    author: String // user.name
 });
 
 const Review = mongoose.model("Review", {

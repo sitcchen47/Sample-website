@@ -52,6 +52,12 @@ body {
     body > .container > .main {
       float: left;
       width: 100%; }
+      body > .container > .main > .divForm {
+        margin: 30px; }
+        body > .container > .main > .divForm label, body > .container > .main > .divForm input, body > .container > .main > .divForm textarea {
+          display: block; }
+      body > .container > .main > .article {
+        margin: 30px; }
     body > .container > .right {
       float: left;
       width: 150px;

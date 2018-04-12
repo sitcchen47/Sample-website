@@ -1,0 +1,13 @@
+<script>
+    let error = <%- JSON.stringify(error) %>;
+    if (error) {
+        let targetInputDom = document.querySelector(`input[name=${error.position}]`);
+        if (targetInputDom) {
+            let spanDom = document.createElement('span');
+            spanDom.innerText = error.message;
+            targetInputDom.insertAdjacentElement("afterend", spanDom);
+        } else {
+            alert(error.message);
+        }
+    }
+</script>

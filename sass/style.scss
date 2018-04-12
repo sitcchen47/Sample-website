@@ -78,6 +78,17 @@ body {
         > .main {
             float: left;
             width: 100%;
+
+            > .divForm {
+                margin: 30px;
+
+                label, input, textarea {
+                    display: block;
+                }
+            }
+            > .article {
+                margin: 30px;
+            }
         }
     
         > .right {
