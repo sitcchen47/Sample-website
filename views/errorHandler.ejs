@@ -6,7 +6,7 @@
             let spanDom = document.createElement('span');
             spanDom.innerText = error.message;
             targetInputDom.insertAdjacentElement("afterend", spanDom);
-        } else {
+        } else if (error.position === "alert") {
             alert(error.message);
         }
     }

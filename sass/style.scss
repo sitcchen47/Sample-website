@@ -1,6 +1,6 @@
 $sidebarWidth: 150px;
 $headerHeight: 50px;
-$containerHeight: 800px;
+$containerHeight: 1600px;
 $bgColor: #eee;
 
 $liInterval: 15px;
@@ -34,6 +34,12 @@ $articleMargin: 30px;
             color: 	#999;
             text-decoration: underline;
         }
+    }
+    span.author {
+        color: green;
+    }
+    span.time {
+        color: green;
     }
 }
 body {
@@ -95,9 +101,20 @@ body {
 
             > .divForm {
                 margin: $articleMargin;
-
                 label, input, textarea {
                     display: block;
+                }
+
+                > button.articlePostTrigger {
+                    color: #222;
+                    &:hover {
+                        background-color: #888;
+                    }
+                    border: 1px solid #000;
+                    border-radius: 8px;
+                }
+                > .hidden {
+                    display: none;
                 }
             }
             > .article {

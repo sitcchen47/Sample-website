@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/reg', (req, res) => {
-  let error = req.session.error;
+  let error = req.session.error && req.session.error.position === "alert" ? null : req.session.error ;
   res.render('reg', {error});
 });
 

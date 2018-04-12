@@ -28,7 +28,7 @@ const Article = mongoose.model("Article", {
         type: String,
         require: true,
         minlength: [5, "标题不能少于5个字"],
-        maxlength: [20, "标题不能多于20个字"]
+        maxlength: [30, "标题不能多于30个字"]
     },
     body: String,
     liked: {

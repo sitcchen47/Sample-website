@@ -4,15 +4,16 @@
             <% for(let i = 0; i < articles.length; i++) { %>
                 <div class="article">
                     <p> <a href="/articles/id/<%= articles[i]._id %>"><%= articles[i].title %></a> <br>
-                        <span><%= articles[i].author %><span> | <span>发布于</span> <span><%= Messages[i]%></span>
+                        <span class="author"><%= articles[i].author %></span> | <span>发布于</span> <span class="time"><%= Messages[i]%></span>
                         <!-- <a href="#"><%= articles[i].liked %></a> -->
                         <hr>
                     </p>
                 </div>
             <% } %>
             <div class="divForm">
-            <form action="/articles/post" method="POST">
-                <p>发表文章</p>
+            
+            <button class="articlePostTrigger">发表文章</button>
+            <form action="/articles/post" method="POST" class="hidden">
                 <label for="title">文章标题
                     <input type="text" name="title" id="a-title">
                 </label>
@@ -30,6 +31,13 @@
         </div>
         <div class="right"></div>
     </div>
+    <script>
+        const buttondom = document.querySelector('button.articlePostTrigger');
+        buttondom.addEventListener('click', function(event) {
+            let formdom = event.target.nextElementSibling;
+            formdom.classList.toggle('hidden');
+        });
+    </script>
     <%- include('errorHandler', {error: error})%>
 <body>   
 <%- include('footer') %>
