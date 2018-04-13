@@ -1,13 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>留言板</title>
-    <!-- <title><%= title%></title> -->
-</head>
-<body>
-    
-</body>
-</html>
+<%- include('header', {user: user}) %>
+    <div class="container">
+        <div class="main">
+            <div class="divForm">
+                <button class="reviewPostTrigger">留言</button>
+                <form action="/reviews/post" method="POST" class="hidden">
+                    <label for="body">内容
+                        <textarea name="body" id="a-body" cols="50" rows="2" placeholder="留言不能少于5个字, 多于100个字"></textarea>
+                    </label>
+                    <label for="confirmPic">验证码
+                        <img src="/random-confirm-pic" alt="验证码图片">
+                        <input type="text" name="confirmPic" id="a-confirmPic">
+                    </label>
+                    <button type="submit">提交</button>
+                    <button type="reset">重置</button>
+                </form>
+            </div>
+            <div class="reviews">
+                <% for(let i = 0; i < reviews.length; i++) { %>
+                    <div class="review">
+                        <p> 
+                            <span><%= reviews[i].body %></span><br />
+                            <span class="author">用户：<%= reviews[i].author %></span> | <span>发布于</span> <span class="time"><%= Messages[i]%></span>
+                            <hr>
+                        </p>
+                    </div>
+                <% } %>
+            </div>
+            <div class="pages"></div>
+        </div>
+        <div class="right"></div>
+    </div>
+    <script type="text/javascript" src="../javascripts/build.js"></script>
+    <script type="text/javascript" src="../javascripts/createEle.js"></script>
+    <!-- currentPage  reviewNumberEachPage  pagenum-->
+    <script>
+        const buttondom = document.querySelector('button.reviewPostTrigger');
+        // 判断此时有没有服务器端的错误 如果有 那么就要去掉hidden
+        let err = <%- JSON.stringify(error) %>;
+        if (Object.keys(err).length !== 0) { // 如果error 为一个空对象
+            buttondom.nextElementSibling.classList.remove("hidden");
+        }
+        buttondom.addEventListener('click', function(event) {
+            let formdom = event.target.nextElementSibling;
+            formdom.classList.toggle('hidden');
+        });
+        
+        // 
+        const p = createElement;
+        const pagesDom = document.querySelector(".pages");
+
+        let currentPage = <%= currentPage %>;
+        let pages = pagearr(<%= reviewNumberEachPage %>);
+
+        render(currentPage, <%= pagenum %>);
+
+        function render(currentPage, sum) {
+            const result = pages(currentPage, sum);
+            pagesDom.innerHTML="";
+            if (result.prevGroupStartPage) {
+                pagesDom.appendChild(p(`<a href="/reviews/${result.prevGroupStartPage}">${result.prevGroupStartPage}</a>`));
+                pagesDom.appendChild(p(`<span> ... </span>`));
+            }
+            result.pageArr.forEach(page => {
+                pagesDom.appendChild(p(`
+                    <a href="/reviews/${page}" class="${page === currentPage ? "active" : ""}">${page}</a>
+                    `));
+            });
+
+            if(result.lastPage){
+                pagesDom.appendChild(p(`<span> ... </span>`));
+                pagesDom.appendChild(p(`<a href="/reviews/${result.lastPage}">${result.lastPage}</a>`));
+            }
+
+            const as = pagesDom.querySelectorAll("a");
+            as.forEach(a=>a.addEventListener("click",e=>render(e.target.innerText,sum)));
+        }
+    </script>
+    <%- include('errorHandler', {error: error})%>
+<body>   
+<%- include('footer') %>

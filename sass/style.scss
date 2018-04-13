@@ -43,6 +43,15 @@ $articleMargin: 30px;
         color: green;
     }
 }
+
+@mixin triggerSetting {
+    color: #222;
+    &:hover {
+        background-color: #888;
+    }
+    border: 1px solid #000;
+    border-radius: 8px;
+}
 body {
     padding: 0 $headerHeight;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -107,13 +116,13 @@ body {
                 }
 
                 > button.articlePostTrigger {
-                    color: #222;
-                    &:hover {
-                        background-color: #888;
-                    }
-                    border: 1px solid #000;
-                    border-radius: 8px;
+                    @include triggerSetting();
                 }
+
+                > button.reviewPostTrigger {
+                    @include triggerSetting();
+                }
+
                 > .hidden {
                     display: none;
                 }
@@ -128,6 +137,19 @@ body {
 
             > article {
                 @include articleLayout();                
+            }
+
+            > .reviews {
+                height: $articlesHeight;
+                > .review {
+                    margin: $articleMargin;
+                    span.author {
+                        color: green;
+                    }
+                    span.time {
+                        color: green;
+                    }
+                }
             }
 
             > .pages {

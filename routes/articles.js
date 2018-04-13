@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
     res.render('articles', {
         title: "文章列表", 
         user: req.session.user, 
-        error: req.session.error, 
+        error: req.session.error ? req.session.error : {}, 
         articles, 
         Messages, 
         articleNumberEachPage,
@@ -39,7 +39,7 @@ router.get('/:pageNum', async (req, res) => {
     res.render('articles', {
         title: "文章列表", 
         user: req.session.user, 
-        error: req.session.error, 
+        error: req.session.error ? req.session.error : {}, 
         articles, 
         Messages, 
         articleNumberEachPage,
@@ -55,6 +55,7 @@ router.post('/post', async (req, res) => {
             position: "alert"
         }       
         res.redirect('back');
+        return;
     }
     const {title, body, confirmPic} = req.body;
     console.log(req.session.confirmPic.toLowerCase(), confirmPic.toLowerCase());

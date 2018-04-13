@@ -41,7 +41,12 @@ const Article = mongoose.model("Article", {
 });
 
 const Review = mongoose.model("Review", {
-    body: String,
+    body: {
+        type: String,
+        require: true,
+        minlength: [5, "留言不能少于5个字"],
+        maxlength: [100, "留言不能多于100个字"]
+    },
     createTime: Date,
     editTime: Date,
     author: String

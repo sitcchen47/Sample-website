@@ -62,6 +62,12 @@ body {
           border-radius: 8px; }
           body > .container > .main > .divForm > button.articlePostTrigger:hover {
             background-color: #888; }
+        body > .container > .main > .divForm > button.reviewPostTrigger {
+          color: #222;
+          border: 1px solid #000;
+          border-radius: 8px; }
+          body > .container > .main > .divForm > button.reviewPostTrigger:hover {
+            background-color: #888; }
         body > .container > .main > .divForm > .hidden {
           display: none; }
       body > .container > .main > .articles {
@@ -92,6 +98,14 @@ body {
           color: green; }
         body > .container > .main > article span.time {
           color: green; }
+      body > .container > .main > .reviews {
+        height: 600px; }
+        body > .container > .main > .reviews > .review {
+          margin: 30px; }
+          body > .container > .main > .reviews > .review span.author {
+            color: green; }
+          body > .container > .main > .reviews > .review span.time {
+            color: green; }
       body > .container > .main > .pages {
         width: 70%;
         margin: 20px auto 0 auto;

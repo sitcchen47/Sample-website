@@ -4,7 +4,7 @@
             <div class="articles">
             <% for(let i = 0; i < articles.length; i++) { %>
                 <div class="article">
-                    <p> <a href="/articles/id/<%= articles[i]._id %>"><%= articles[i].title %></a> <br>
+                    <p> <a href="/articles/id/<%= articles[i]._id %>"><%= articles[i].title %></a> <br />
                         <span class="author"><%= articles[i].author %></span> | <span>发布于</span> <span class="time"><%= Messages[i]%></span>
                         <!-- <a href="#"><%= articles[i].liked %></a> -->
                         <hr>
@@ -13,16 +13,17 @@
             <% } %>
             </div>
             <div class="pages"></div>
-
+                
             <div class="divForm">
             
             <button class="articlePostTrigger">发表文章</button>
             <form action="/articles/post" method="POST" class="hidden">
+                <br />
                 <label for="title">文章标题
-                    <input type="text" name="title" id="a-title">
+                    <input type="text" name="title" id="a-title" placeholder="不能少于5个字和多于30个字">
                 </label>
                 <label for="body">内容
-                    <textarea name="body" id="a-body" cols="30" rows="10"></textarea>
+                    <textarea name="body" id="a-body" cols="30" rows="10" ></textarea>
                 </label>
                 <label for="confirmPic">验证码
                     <img src="/random-confirm-pic" alt="验证码图片">
@@ -39,6 +40,11 @@
     <script type="text/javascript" src="../javascripts/createEle.js"></script>
     <script>
         const buttondom = document.querySelector('button.articlePostTrigger');
+        // 判断此时有没有服务器端的错误 如果有 那么就要去掉hidden
+        let err = <%- JSON.stringify(error) %>;
+        if (Object.keys(err).length !== 0) { // 如果error 为一个空对象
+            buttondom.nextElementSibling.classList.remove("hidden");
+        }
         buttondom.addEventListener('click', function(event) {
             let formdom = event.target.nextElementSibling;
             formdom.classList.toggle('hidden');
