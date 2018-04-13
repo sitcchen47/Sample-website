@@ -1,6 +1,7 @@
 $sidebarWidth: 150px;
 $headerHeight: 50px;
-$containerHeight: 1600px;
+$containerHeight: 1200px;
+$articlesHeight: 600px;
 $bgColor: #eee;
 
 $liInterval: 15px;
@@ -117,12 +118,37 @@ body {
                     display: none;
                 }
             }
-            > .article {
-                @include articleLayout();
-            }
+
+            > .articles {
+                height: $articlesHeight;
+                > .article {
+                    @include articleLayout();
+                }
+            }  
 
             > article {
                 @include articleLayout();                
+            }
+
+            > .pages {
+                width: 70%;
+                margin: 20px auto 0 auto;
+                background: #fefefe;
+                display: flex;
+                text-align: center;
+              
+                >a {
+                    color: #555;
+                    flex-grow: 1;
+                    background: #fefefe;
+                    line-height: 35px;
+                    margin: 3px;
+                    border: 1px solid #eee;
+                    text-decoration: none;
+                    &.active {
+                        background-color: #efefef;
+                    }
+                }
             }
         }
     

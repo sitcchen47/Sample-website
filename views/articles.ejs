@@ -1,6 +1,7 @@
 <%- include('header', {user: user}) %>
     <div class="container">
         <div class="main">
+            <div class="articles">
             <% for(let i = 0; i < articles.length; i++) { %>
                 <div class="article">
                     <p> <a href="/articles/id/<%= articles[i]._id %>"><%= articles[i].title %></a> <br>
@@ -10,6 +11,9 @@
                     </p>
                 </div>
             <% } %>
+            </div>
+            <div class="pages"></div>
+
             <div class="divForm">
             
             <button class="articlePostTrigger">发表文章</button>
@@ -31,12 +35,45 @@
         </div>
         <div class="right"></div>
     </div>
+    <script type="text/javascript" src="../javascripts/build.js"></script>
+    <script type="text/javascript" src="../javascripts/createEle.js"></script>
     <script>
         const buttondom = document.querySelector('button.articlePostTrigger');
         buttondom.addEventListener('click', function(event) {
             let formdom = event.target.nextElementSibling;
             formdom.classList.toggle('hidden');
         });
+        
+        // 
+        const p = createElement;
+        const pagesDom = document.querySelector(".pages");
+
+        let currentPage = <%= currentPage %>;
+        let pages = pagearr(<%= articleNumberEachPage %>);
+
+        render(currentPage, <%= pagenum %>);
+
+        function render(currentPage, sum) {
+            const result = pages(currentPage, sum);
+            pagesDom.innerHTML="";
+            if (result.prevGroupStartPage) {
+                pagesDom.appendChild(p(`<a href="/articles/${result.prevGroupStartPage}">${result.prevGroupStartPage}</a>`));
+                pagesDom.appendChild(p(`<span> ... </span>`));
+            }
+            result.pageArr.forEach(page => {
+                pagesDom.appendChild(p(`
+                    <a href="/articles/${page}" class="${page === currentPage ? "active" : ""}">${page}</a>
+                    `));
+            });
+
+            if(result.lastPage){
+                pagesDom.appendChild(p(`<span> ... </span>`));
+                pagesDom.appendChild(p(`<a href="/articles/${result.lastPage}">${result.lastPage}</a>`));
+            }
+
+            const as = pagesDom.querySelectorAll("a");
+            as.forEach(a=>a.addEventListener("click",e=>render(e.target.innerText,sum)));
+        }
     </script>
     <%- include('errorHandler', {error: error})%>
 <body>   

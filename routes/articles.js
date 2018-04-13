@@ -2,17 +2,51 @@ var router = require("express").Router();
 var DataModel = require("./model");
 var util = require('../util/randomWord');
 
+let articleNumberEachPage = 7;
 router.get('/', async (req, res) => {
-    let articleNumberEachPage = 10;
     let articles = await DataModel.Article.find({})
     .sort('-createTime')
     .limit(articleNumberEachPage)
     .skip(0);
 
+    let articlesnum = await DataModel.Article.count({});
+
     let Messages = [];
     articles.forEach(doc => Messages.push(util.getDif(doc.createTime)));
-    res.render('articles', {title: "文章列表", user: req.session.user, error: req.session.error, articles, Messages });
+    res.render('articles', {
+        title: "文章列表", 
+        user: req.session.user, 
+        error: req.session.error, 
+        articles, 
+        Messages, 
+        articleNumberEachPage,
+        currentPage: 1, 
+        pagenum: Math.ceil(articlesnum / articleNumberEachPage)
+    });
 });
+
+router.get('/:pageNum', async (req, res) => {
+    let pageNum = req.params.pageNum;
+    let articles = await DataModel.Article.find({})
+    .sort('-createTime')
+    .limit(articleNumberEachPage)
+    .skip((pageNum - 1) * articleNumberEachPage);
+
+    let articlesnum = await DataModel.Article.count({});
+
+    let Messages = [];
+    articles.forEach(doc => Messages.push(util.getDif(doc.createTime)));
+    res.render('articles', {
+        title: "文章列表", 
+        user: req.session.user, 
+        error: req.session.error, 
+        articles, 
+        Messages, 
+        articleNumberEachPage,
+        currentPage: pageNum, 
+        pagenum: Math.ceil(articlesnum / articleNumberEachPage)
+    });
+})
 
 router.post('/post', async (req, res) => {
     if (!req.session.user) {
@@ -23,6 +57,7 @@ router.post('/post', async (req, res) => {
         res.redirect('back');
     }
     const {title, body, confirmPic} = req.body;
+    console.log(req.session.confirmPic.toLowerCase(), confirmPic.toLowerCase());
     if (req.session.confirmPic.toLowerCase() === confirmPic.toLowerCase()) {
         let article;
         try {
