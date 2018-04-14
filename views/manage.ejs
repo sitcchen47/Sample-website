@@ -50,22 +50,24 @@
         });
         
         // 点击 "修改" buton 实现修改产品功能
-        const editProductButton = document.querySelector('button.editProduct');
-        editProductButton.addEventListener('click', function(event) {
-            let parentEle = event.target.parentNode;
-            let name = parentEle.firstElementChild.innerText;
-            let price = parentEle.querySelector('.price').innerText;
-            let description = event.target.previousElementSibling.innerText;
-            console.log(parentEle);
-            console.log(name);
-            console.log(price);
-            console.log(description);
-            
-            let formDom = document.querySelector('.product-add');
-            formDom.classList.remove('hidden'); // make the form appear
-            formDom.querySelector('input[name="name"]').value = name;
-            formDom.querySelector('input[name="price"]').value = price;
-            formDom.querySelector('textarea[name="description"]').value = description;
+        const editProductButtons = document.querySelectorAll('button.editProduct');
+        editProductButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                let parentEle = event.target.parentNode;
+                let name = parentEle.firstElementChild.innerText;
+                let price = parentEle.querySelector('.price').innerText;
+                let description = event.target.previousElementSibling.innerText;
+                console.log(parentEle);
+                console.log(name);
+                console.log(price);
+                console.log(description);
+                
+                let formDom = document.querySelector('.product-add');
+                formDom.classList.remove('hidden'); // make the form appear
+                formDom.querySelector('input[name="name"]').value = name;
+                formDom.querySelector('input[name="price"]').value = price;
+                formDom.querySelector('textarea[name="description"]').value = description;
+            });
         });
 
         // new errorHandler
