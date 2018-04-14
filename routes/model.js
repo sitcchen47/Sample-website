@@ -63,7 +63,7 @@ const Product = mongoose.model("Product", {
         minlength: [1, "产品名长度至少为1"],
         maxlength: 10
     },
-    picUrl: String,
+    picAddress: String,
     description: {
         type: String,
         require: true,
@@ -74,7 +74,12 @@ const Product = mongoose.model("Product", {
         type: String,
         require: true,
         match: [/[1-9]\d*/, "价格只能是数字且开头不能为0"]
-    }
+    },
+    createTime: {
+        type: Date,
+        require: true
+    },
+    editTime: Date
 })
 module.exports = {
     User,

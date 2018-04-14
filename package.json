@@ -17,6 +17,7 @@
     "http-errors": "~1.6.2",
     "mongoose": "^5.0.14",
     "morgan": "~1.9.0",
+    "multer": "^1.3.0",
     "png-word": "0.0.7"
   },
   "devDependencies": {

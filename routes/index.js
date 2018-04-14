@@ -131,7 +131,7 @@ router.post("/login", async (req, res) => {
     }
   } else if (loginname === admin.name && password === admin.password){
     res.locals.user = req.session.user = "管理员";
-    res.render('/manage');
+    res.redirect('/manage');
     // 管理员权限
   } else {
     req.session.error = {

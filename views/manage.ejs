@@ -1,0 +1,91 @@
+<%- include('header', {user: user}) %>
+    <div class="container">
+        <div class="main">
+            <div class="divForm">
+                <button class="productTrigger">发布新产品</button>
+                <form action="/manage/upload" method="post" class="product-add hidden" enctype="multipart/form-data">
+                    <label for="name">产品名
+                        <input type="text" name="name" id="product-name">
+                    </label>
+                    <label for="picture">产品图
+                        <input type="file" name="picture" id="product-picture">
+                    </label>
+                    <label for="price">价格
+                        <input type="text" name="price" id="product-price">
+                    </label>
+                    <label for="description">产品描述
+                        <textarea name="description" id="" cols="30" rows="10"></textarea>
+                    </label>
+                    <button type="submit">提交</button>
+                </form>  
+            </div>
+            <div class="products">
+            <% for (let i = 0; i < products.length; i++) { %>
+            
+                <div class="product">
+                    <h2><%= products[i].name %></h2>
+                    <span class="time"><%= times[i] %></span> | <span class="price"> <%= products[i].price %> </span><br />
+                    <img src="/images/<%= products[i].picAddress %>" alt="<%= products[i].name %> 图片">
+                    <p><%= products[i].description %></p>
+                    <button class="editProduct">修改</button> <button><a href="/products/delete/<%= products[i]._id %>">删除</a></button>
+                </div>
+                
+            <% } %>
+            </div>
+        </div>
+    <div class="right"></div>
+    </div>
+    <script>
+        // title, user, error, products, times
+        let err = <%- JSON.stringify(error)%>; // 表单错误
+        if (err) {
+            let formDom = document.querySelector('.product-add');
+            formDom.classList.remove('hidden');
+        }
+        // 点击 "发布新产品" button 实现发布产品功能
+        const buttondom = document.querySelector('.productTrigger');
+        buttondom.addEventListener('click', function(event) {
+            let formDom = event.target.nextElementSibling;
+            formDom.classList.toggle('hidden');
+        });
+        
+        // 点击 "修改" buton 实现修改产品功能
+        const editProductButton = document.querySelector('button.editProduct');
+        editProductButton.addEventListener('click', function(event) {
+            let parentEle = event.target.parentNode;
+            let name = parentEle.firstElementChild.innerText;
+            let price = parentEle.querySelector('.price').innerText;
+            let description = event.target.previousElementSibling.innerText;
+            console.log(parentEle);
+            console.log(name);
+            console.log(price);
+            console.log(description);
+            
+            let formDom = document.querySelector('.product-add');
+            formDom.classList.remove('hidden'); // make the form appear
+            formDom.querySelector('input[name="name"]').value = name;
+            formDom.querySelector('input[name="price"]').value = price;
+            formDom.querySelector('textarea[name="description"]').value = description;
+        });
+
+        // new errorHandler
+        let position;
+        let possible = ["name", "price", "description", "picture"];
+        for (let i = 0; i < possible.length; i++) {
+            if (err[possible[i]]) {
+                position = possible[i];
+                break;
+            }
+        }
+        
+        if (position) {
+            err = err[position];
+            let targetInputDom = document.querySelector(`input[name=${err.position}]`);
+            let spanDom = document.createElement('span');
+            spanDom.innerText = err.message;
+            targetInputDom.insertAdjacentElement("afterend", spanDom);
+        }
+
+    </script>
+<body>   
+<%- include('footer') %>

@@ -41,5 +41,12 @@ module.exports = {
         } 
         let yearDif = parseInt(monthDif / 12);
         return `${yearDif}年前`;
+    },
+    getSpecificDate(date) {
+        if (!(date instanceof Date)) throw "The parameter should an instance of Date!";
+        let weekDic = ["七", "一", "二", "三", "四", "五", "六"];
+        return `${date.getFullYear()} 年 ${date.getMonth() + 1} 月 ${date.getDate()} 日  星期${weekDic[date.getDay()]} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
     }
 }
+
+// console.log(module.exports.getSpecificDate(new Date()));
