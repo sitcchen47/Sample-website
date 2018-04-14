@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var DataModel = require("./model");
 var util = require("../util/randomWord");
+var fs = require("fs-extra");
 
 var multer = require("multer");
 var path = require("path");
@@ -28,7 +29,18 @@ router.get('/', async (req, res) => {
     }
 });
 
-
+router.get('/delete/:id', async (req, res) => {
+    let picfilename = req.params.id;
+    console.log(picfilename);
+    let product = await DataModel.Product.remove({picAddress: picfilename});
+    console.log(product);
+    try { 
+        await fs.unlink(path.join(__dirname, `../public/images/${picfilename}`));
+    } catch (e) {
+        console.log(e);
+    }
+    res.redirect("/manage");
+});
 
 router.post('/upload', upload.single('picture'), async (req, res) => {
     let {name, price, description} = req.body;
@@ -60,6 +72,7 @@ router.post('/upload', upload.single('picture'), async (req, res) => {
             await product.save();
         } catch(e) {
             req.session.error = e.errors;
+            console.log(req.session.error);
         }
         res.redirect("/manage");
     } else {

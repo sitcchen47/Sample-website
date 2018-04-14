@@ -8,6 +8,8 @@ $liInterval: 15px;
 $aPadding: 2px;
 $articleMargin: 30px;
 
+$imgWidth: 300px;
+
 @mixin aCompo {
     font-size: 1.25em;
     text-decoration: none;
@@ -41,6 +43,37 @@ $articleMargin: 30px;
     }
     span.time {
         color: green;
+    }
+}
+
+@mixin productsLayout {
+    $padding: 10px;
+    margin: $articleMargin;
+    overflow: hidden;
+    
+    > .product {
+
+        float: left;
+        margin-right: 1%;
+        background-color: #aaa;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        width: 20%;
+        padding: 0 10px 10% 10px;
+
+        > span.price {
+            font-size: 1.1em;
+            color: red;
+        }
+
+        > img {
+            width: 100%;
+            height: 100%;
+        }
+
+        > button > a {
+            text-decoration: none;
+        }
     }
 }
 
@@ -104,11 +137,11 @@ body {
         background-color: $bgColor;
         padding: 0 $sidebarWidth 0 0;
         overflow: hidden;
-        height: $containerHeight;
         
         > .main {
             float: left;
             width: 100%;
+            padding-bottom: 10%;
 
             > .divForm {
                 margin: $articleMargin;
@@ -153,6 +186,10 @@ body {
                 }
             }
 
+            > .products {
+                @include productsLayout();
+            }
+
             > .pages {
                 width: 70%;
                 margin: 20px auto 0 auto;
@@ -178,9 +215,8 @@ body {
         > .right {
             @include holySetting();
 
-            height: 100%;
             background-color: mix($bgColor, #fff);
-
+            padding-bottom: 100%;
             > div.reg-log {
                 position: relative;
                 top: - $headerHeight / 2;

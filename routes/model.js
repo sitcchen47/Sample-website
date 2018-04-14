@@ -67,7 +67,7 @@ const Product = mongoose.model("Product", {
     description: {
         type: String,
         require: true,
-        match: [/^([a-zA-Z]|[u4e00-u9fa5]|_)([a-zA-Z0-9]|[u4e00-u9fa5]|_)*$/, "包含中文，英文，数字，下划线，不能输入括号，不能以数字开头"],
+        // match: [//, "包含中文，英文，数字，下划线，不能输入括号，不能以数字开头"],
         minlength: [10, "产品描述不能少于10个字符"]
     },
     price: {

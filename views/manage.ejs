@@ -27,7 +27,7 @@
                     <span class="time"><%= times[i] %></span> | <span class="price"> <%= products[i].price %> </span><br />
                     <img src="/images/<%= products[i].picAddress %>" alt="<%= products[i].name %> 图片">
                     <p><%= products[i].description %></p>
-                    <button class="editProduct">修改</button> <button><a href="/products/delete/<%= products[i]._id %>">删除</a></button>
+                    <button class="editProduct">修改</button> <button><a href="/manage/delete/<%= products[i].picAddress %>">删除</a></button>
                 </div>
                 
             <% } %>
@@ -38,7 +38,7 @@
     <script>
         // title, user, error, products, times
         let err = <%- JSON.stringify(error)%>; // 表单错误
-        if (err) {
+        if ( err && Object.keys(err).length ) {
             let formDom = document.querySelector('.product-add');
             formDom.classList.remove('hidden');
         }
@@ -80,7 +80,7 @@
         
         if (position) {
             err = err[position];
-            let targetInputDom = document.querySelector(`input[name=${err.position}]`);
+            let targetInputDom = position === "description" ? document.querySelector(`textarea[name=${position}]`): document.querySelector(`input[name=${position}]`);
             let spanDom = document.createElement('span');
             spanDom.innerText = err.message;
             targetInputDom.insertAdjacentElement("afterend", spanDom);
