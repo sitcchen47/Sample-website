@@ -8,10 +8,10 @@ The content may be empty. You can post whatever you want~
    npm start
 2. open your brower and navigate to http://localhost:3000
 
-# Detail
-HomePage 
-Product
-Articles
-Reviews
+# Introduction
+Technology Stack: NodeJs Express, Mongoose, Vanilla JavaScript, Sass/Scss, Websocket
+Four core webpages: *HomePage* *Products* *Aritcles* *Reviews* *Manage* 
 
-The css file in public/stylesheets is build by sass/scss
+* Implement register/login feature and relating validation, preserve administrator to manage the data untouched by users.
+* Implement paging function on each page, displaying contents ordered by createTime
+* Implement mini chatroom on the *Review* Page.
