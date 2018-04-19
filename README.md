@@ -6,7 +6,7 @@ The content may be empty. You can post whatever you want~
 # Usage
 1. npm install  
    npm start
-2. open your brower and navigate to http://localhost:3000
+2. open your browser and navigate to http://localhost:3000
 
 # Introduction
 **Technology Stack:** NodeJs Express, Mongoose, Vanilla JavaScript, Sass/Scss, Websocket
